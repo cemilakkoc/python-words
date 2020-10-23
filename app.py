@@ -75,19 +75,26 @@ class Scraper:
         # have the cleared ready-to-use texts as an array.
         text = text.split(',')
 
-        # ignore the stopwords
-        ignore = set(STOPWORDS)
+        # ignore the stopwords & some characters
+        ignore = [char for char in "\"#$%&\'()*+,-./:;?@[\\]^_`{|}~ \t\n\r\x0b\x0c1234567890"]
+        ignore = set([*STOPWORDS, *ignore, "", " "])
 
         # prepare the words
-        words = (x.rstrip(punctuation).lower() for y in text for x in y.split())
-
+        words = (x.lower() for y in text for x in y.split())
+        
         # create a counter object with the words that are not stopwords 
         c = Counter(word for word in words if word not in ignore)
 
         # get the most common words
         self.most_common_words = c.most_common()
-
-        print("Most common words were: \n", self.most_common_words)
+        
+        with open("words.txt", "w") as f:
+            try:
+                f.writelines([str(words[0])+":"+str(words[1])+"\n" for words in self.most_common_words])
+                f.close()
+            except:
+                pass
+        print("Words are saved into words.txt")
         
     # Creates a Tag Cloud
     def tagcloud(self):
@@ -115,10 +122,10 @@ class Scraper:
 
         # store to file
         plt.savefig("mortytc.png", format="png")
-
         plt.show()
 
         print("Check mortytc.png")
+
         return False
 
         
