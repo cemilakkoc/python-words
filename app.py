@@ -1,17 +1,14 @@
 import os
-from os import path
 import platform
 
 import numpy as np
 import matplotlib.pyplot as plt 
 from PIL import Image
 
-import requests
 import re
 from bs4 import BeautifulSoup
 from bs4.element import Comment
 
-import itertools
 from collections import Counter
 from string import punctuation
 
@@ -19,7 +16,6 @@ from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options 
-import time
 
 class Scraper:
     def __init__(self, url):
