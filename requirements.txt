@@ -1,0 +1,7 @@
+beautifulsoup4==4.9.3
+lxml==4.5.2
+matplotlib==3.3.2
+numpy==1.19.0
+selenium==3.141.0
+wordcloud==1.8.0
+xlib==0.21
